@@ -2,6 +2,8 @@ class Attachment < ActiveRecord::Base
   belongs_to :channel
   belongs_to :user
   
+  validates_attachment_content_type :file, :content_type => 'multipart/form-data'
+  
   if ENV['S3_BUCKET']
     has_attached_file(:file, {
       :storage         => :s3,
